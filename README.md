@@ -161,6 +161,25 @@ oc delete pod -l k8s-app = fluentd-logging
 
 This is from [nekop's japanese article](https://nekop.hatenablog.com/entry/2018/04/20/170257).
 
+
+This daemonset setting mounts `/var/log` as service account `fluentd` so you need to run containers as privileged container.
+Here is command example:
+
+
+### Running using Configmap
+
+To run using external configmap , upload properties to configmap using the following command
+
+```
+kubectl -nkube-logging create configmap fluentd-config  --from-file=docker-image/v1.4/debian-elasticsearch/conf/ 
+```
+
+The file fluentd-daemonset-elasticsearch-rbac.yaml has changes to mount this configmap.
+
+Note: This branch has changes to capture only kubernetes nginx ingress logs.
+
+
+
 ## Issues
 
 We can't notice comments in the DockerHub so don't use them for reporting

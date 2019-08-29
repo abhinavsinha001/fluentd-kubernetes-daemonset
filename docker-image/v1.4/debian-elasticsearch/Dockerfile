@@ -31,11 +31,12 @@ COPY Gemfile* /fluentd/
     && rm -rf /tmp/* /var/tmp/* /usr/lib/ruby/gems/*/cache/*.gem
 
 # Copy configuration files
-COPY ./conf/fluent.conf /fluentd/etc/
-COPY ./conf/systemd.conf /fluentd/etc/
-COPY ./conf/kubernetes.conf /fluentd/etc/
-COPY ./conf/prometheus.conf /fluentd/etc/
+#COPY ./conf/fluent.conf /fluentd/etc/
+#COPY ./conf/systemd.conf /fluentd/etc/
+#COPY ./conf/kubernetes.conf /fluentd/etc/
+#COPY ./conf/prometheus.conf /fluentd/etc/
 RUN touch /fluentd/etc/disable.conf
+RUN fluent-gem install fluent-plugin-parser 
 
 # Copy plugins
 COPY plugins /fluentd/plugins/
